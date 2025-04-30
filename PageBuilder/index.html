@@ -4,11 +4,857 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="css/editor.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    
-</body>
-<script>
+    <!--Use Keyboard minimum 95% of the time -->
+    <div class="" id="vvveb-builder">
+        <div id="top-panel">
+            <img
+            src="./logo_black.png"
+            alt="Vvveb"
+            class="float-start"
+            id="logo"
+            width="80"
+            style="padding-top: 10px; padding-left: 10px"
+            />
 
-</script>
+            <div class="btn-group float-start" role="group">
+            <button
+                class="btn btn-light"
+                title="Toggle file manager"
+                id="toggle-file-manager-btn"
+                data-vvveb-action="toggleFileManager"
+                data-bs-toggle="button"
+                aria-pressed="false"
+            >
+                <img
+                src="libs/builder/icons/file-manager-layout.svg"
+                width="18"
+                height="18"
+                alt=""
+                role="presentation"
+                />
+            </button>
+
+            <button
+                class="btn btn-light"
+                title="Toggle left column"
+                id="toggle-left-column-btn"
+                data-vvveb-action="toggleLeftColumn"
+                data-bs-toggle="button"
+                aria-pressed="false"
+            >
+                <img
+                src="libs/builder/icons/left-column-layout.svg"
+                width="18"
+                height="18"
+                alt=""
+                role="presentation"
+                />
+            </button>
+
+            <button
+                class="btn btn-light"
+                title="Toggle right column"
+                id="toggle-right-column-btn"
+                data-vvveb-action="toggleRightColumn"
+                data-bs-toggle="button"
+                aria-pressed="false"
+            >
+                <img
+                src="libs/builder/icons/right-column-layout.svg"
+                width="18"
+                height="18"
+                alt=""
+                role="presentation"
+                />
+            </button>
+            </div>
+
+            <div class="btn-group me-3" role="group">
+            <button
+                class="btn btn-light"
+                title="Undo (Ctrl/Cmd + Z)"
+                id="undo-btn"
+                data-vvveb-action="undo"
+                data-vvveb-shortcut="ctrl+z"
+            >
+                <i class="la la-undo"></i>
+            </button>
+
+            <button
+                class="btn btn-light"
+                title="Redo (Ctrl/Cmd + Shift + Z)"
+                id="redo-btn"
+                data-vvveb-action="redo"
+                data-vvveb-shortcut="ctrl+shift+z"
+            >
+                <i class="la la-undo la-flip-horizontal"></i>
+            </button>
+            </div>
+
+            <div class="btn-group me-3" role="group">
+            <button
+                class="btn btn-light"
+                title="Designer Mode (Free dragging)"
+                id="designer-mode-btn"
+                data-bs-toggle="button"
+                aria-pressed="false"
+                data-vvveb-action="setDesignerMode"
+            >
+                <i class="la la-hand-rock"></i>
+            </button>
+
+            <button
+                class="btn btn-light"
+                title="Preview"
+                id="preview-btn"
+                type="button"
+                data-bs-toggle="button"
+                aria-pressed="false"
+                data-vvveb-action="preview"
+            >
+                <i class="icon-eye-outline"></i>
+            </button>
+
+            <button
+                class="btn btn-light"
+                title="Fullscreen (F11)"
+                id="fullscreen-btn"
+                data-bs-toggle="button"
+                aria-pressed="false"
+                data-vvveb-action="fullscreen"
+            >
+                <i class="icon-expand-outline"></i>
+            </button>
+
+            <button
+                class="btn btn-light active"
+                title="Toggle navigator"
+                id="toggle-tree-list"
+                data-bs-toggle="button"
+                data-vvveb-action="toggleTreeList"
+                aria-pressed="true"
+            >
+                <i class="icon-layers-outline"></i>
+            </button>
+
+            <button
+                class="btn btn-light"
+                title="Download"
+                id="download-btn"
+                data-vvveb-action="download"
+                data-v-download="index.html"
+            >
+                <i class="la la-download"></i>
+            </button>
+            </div>
+
+            <div class="btn-group me-2 float-end" role="group">
+            <button
+                class="btn btn-primary btn-sm btn-icon save-btn"
+                title="Export (Ctrl + E)"
+                id="save-btn"
+                data-vvveb-action="saveAjax"
+                data-vvveb-url="save.php"
+                data-v-vvveb-shortcut="ctrl+e"
+            >
+                <span class="loading d-none">
+                <i class="icon-save-outline"></i>
+                <span
+                    class="spinner-border spinner-border-sm align-middle"
+                    role="status"
+                    aria-hidden="true"
+                >
+                </span>
+                <span>Saving </span> ...
+                </span>
+
+                <span class="button-text">
+                <i class="icon-save-outline"></i> <span>Save page</span>
+                </span>
+            </button>
+            </div>
+
+            <div class="float-end me-3">
+            <button
+                class="btn btn-light border-0 btn-sm btn-dark-mode"
+                data-vvveb-action="darkMode"
+            >
+                <!-- i class="la la-adjust la-lg"></i -->
+                <i class="la la-sun"></i>
+            </button>
+
+            <a
+                href="#"
+                class="btn btn-light btn-sm btn-preview-url"
+                target="blank"
+                title="View page"
+            >
+                <i class="la la-external-link-alt"></i>
+            </a>
+
+            <div class="btn-group responsive-btns" role="group">
+                <button
+                id="mobile-view"
+                data-view="mobile"
+                class="btn btn-light"
+                title="Mobile view"
+                data-vvveb-action="viewport"
+                >
+                <i class="la la-mobile"></i>
+                </button>
+
+                <button
+                id="tablet-view"
+                data-view="tablet"
+                class="btn btn-light"
+                title="Tablet view"
+                data-vvveb-action="viewport"
+                >
+                <i class="la la-tablet"></i>
+                </button>
+
+                <button
+                id="desktop-view"
+                data-view=""
+                class="btn btn-light"
+                title="Desktop view"
+                data-vvveb-action="viewport"
+                >
+                <i class="la la-laptop"></i>
+                </button>
+
+                <div class="percent">
+                <input
+                    type="number"
+                    id="zoom"
+                    value="100"
+                    step="10"
+                    min="10"
+                    max="100"
+                    class="form-control"
+                    data-vvveb-action="zoomChange"
+                    data-vvveb-on="change"
+                />
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="" id="left-panel">
+            <div>
+                <div id="filemanager">
+                  <div class="header">
+                    <span class="text-secondary"
+                      ><i class="la la-file la-lg"></i> Pages</span
+                    >
+      
+                    <div class="btn-group responsive-btns float-end" role="group">
+                      <button
+                        class="btn btn-outline-primary btn-sm btn-add"
+                        title="New file"
+                        id="new-file-btn"
+                        data-vvveb-action="newPage"
+                        data-vvveb-shortcut=""
+                      >
+                        <i class="icon-add"></i>
+                      </button>
+                    </div>
+                  </div>
+      
+                  <div class="tree">
+                    <ol></ol>
+                  </div>
+                </div>
+      
+                <div class="drag-elements">
+                  <div class="header">
+                    <ul
+                      class="nav nav-tabs nav-fill"
+                      id="elements-tabs"
+                      role="tablist"
+                    >
+                      <li class="nav-item sections-tab">
+                        <a
+                          class="nav-link active"
+                          id="sections-tab"
+                          data-bs-toggle="tab"
+                          href="#sections"
+                          role="tab"
+                          aria-controls="sections"
+                          aria-selected="true"
+                          title="Sections"
+                        >
+                          <i class="icon-layers-outline"></i>
+                        </a>
+                      </li>
+                      <li class="nav-item component-tab">
+                        <a
+                          class="nav-link"
+                          id="components-tab"
+                          data-bs-toggle="tab"
+                          href="#components-tabs"
+                          role="tab"
+                          aria-controls="components"
+                          aria-selected="false"
+                          title="Components"
+                        >
+                          <i class="icon-cube-outline"></i>
+                        </a>
+                      </li>
+                      <li class="nav-item component-properties-tab d-none">
+                        <a
+                          class="nav-link"
+                          id="properties-tab"
+                          data-bs-toggle="tab"
+                          href="#properties"
+                          role="tab"
+                          aria-controls="properties"
+                          aria-selected="false"
+                          title="Properties"
+                        >
+                          <i class="icon-settings-outline"></i>
+                        </a>
+                      </li>
+                      <li class="nav-item component-configuration-tab">
+                        <a
+                          class="nav-link"
+                          id="configuration-tab"
+                          data-bs-toggle="tab"
+                          href="#configuration"
+                          role="tab"
+                          aria-controls="configuration"
+                          aria-selected="false"
+                          title="Styles"
+                        >
+                          <i class="icon-color-wand-outline"></i>
+                        </a>
+                      </li>
+                    </ul>
+      
+                    <div class="tab-content">
+                      <div
+                        class="tab-pane show active sections"
+                        id="sections"
+                        role="tabpanel"
+                        aria-labelledby="sections-tab"
+                      >
+                        <ul
+                          class="nav nav-tabs nav-fill nav-underline sections-tabs"
+                          id="sections-tabs"
+                          role="tablist"
+                        >
+                          <li class="nav-item content-tab">
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="tab"
+                              href="#sections-new-tab"
+                              role="tab"
+                              aria-controls="components"
+                              aria-selected="false"
+                            >
+                              <i class="icon-albums-outline"></i>
+                              <div><span>Sections</span></div></a
+                            >
+                          </li>
+                          <li class="nav-item style-tab">
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="tab"
+                              href="#sections-list"
+                              role="tab"
+                              aria-controls="sections"
+                              aria-selected="true"
+                            >
+                              <i class="icon-document-text-outline"></i>
+                              <div><span>Page Sections</span></div></a
+                            >
+                          </li>
+                        </ul>
+      
+                        <div class="tab-content">
+                          <div
+                            class="tab-pane"
+                            id="sections-list"
+                            data-section="style"
+                            role="tabpanel"
+                            aria-labelledby="style-tab"
+                          >
+                            <div class="drag-elements-sidepane sidepane">
+                              <div>
+                                <div class="sections-container p-4">
+                                  <div class="section-item" draggable="true">
+                                    <div class="controls">
+                                      <div class="handle"></div>
+                                      <div class="info">
+                                        <div class="name">
+                                          &nbsp;
+                                          <div class="type">&nbsp;</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="section-item" draggable="true">
+                                    <div class="controls">
+                                      <div class="handle"></div>
+                                      <div class="info">
+                                        <div class="name">
+                                          &nbsp;
+                                          <div class="type">&nbsp;</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="section-item" draggable="true">
+                                    <div class="controls">
+                                      <div class="handle"></div>
+                                      <div class="info">
+                                        <div class="name">
+                                          &nbsp;
+                                          <div class="type">&nbsp;</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- div class="section-item" draggable="true">
+                                                                      <div class="controls">
+                                                                          <div class="handle"></div>
+                                                                          <div class="info">
+                                                                              <div class="name">welcome area
+                                                                                  <div class="type">section</div>
+                                                                              </div>
+                                                                          </div>
+                                                                          <div class="buttons"> <a class="delete-btn" href="" title="Remove section"><i class="la la-trash text-danger"></i></a>
+                                                                              
+                                                                              <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a> </div>
+                                                                      </div>
+                                                                      <input class="header_check" type="checkbox" id="section-components-9338">
+                                                                      <label for="section-components-9338">
+                                                                          <div class="header-arrow"></div>
+                                                                      </label>
+                                                                      <div class="tree">
+                                                                          <ol></ol>
+                                                                      </div>
+                                                                  </div -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+      
+                          <div
+                            class="tab-pane show active"
+                            id="sections-new-tab"
+                            data-section="content"
+                            role="tabpanel"
+                            aria-labelledby="content-tab"
+                          >
+                            <div class="search">
+                              <div class="expand">
+                                <button
+                                  class="text-sm"
+                                  title="Expand All"
+                                  data-vvveb-action="expand"
+                                >
+                                  <i class="la la-plus"></i>
+                                </button>
+                                <button
+                                  title="Collapse all"
+                                  data-vvveb-action="collapse"
+                                >
+                                  <i class="la la-minus"></i>
+                                </button>
+                              </div>
+      
+                              <input
+                                class="form-control section-search"
+                                placeholder="Search sections"
+                                type="text"
+                                data-vvveb-action="search"
+                                data-vvveb-on="keyup"
+                              />
+                              <button
+                                class="clear-backspace"
+                                data-vvveb-action="clearSearch"
+                                title="Clear search"
+                              >
+                                <i class="la la-times"></i>
+                              </button>
+                            </div>
+      
+                            <div class="drag-elements-sidepane sidepane">
+                              <div class="block-preview">
+                                <img src="" style="display: none" />
+                              </div>
+                              <div>
+                                <ul
+                                  class="sections-list clearfix"
+                                  data-type="leftpanel"
+                                ></ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+      
+                      <div
+                        class="tab-pane show"
+                        id="components-tabs"
+                        role="tabpanel"
+                        aria-labelledby="components-tab"
+                      >
+                        <ul
+                          class="nav nav-tabs nav-fill nav-underline sections-tabs"
+                          role="tablist"
+                        >
+                          <li class="nav-item components-tab">
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="tab"
+                              href="#components"
+                              role="tab"
+                              aria-controls="components"
+                              aria-selected="true"
+                            >
+                              <i class="icon-cube-outline"></i>
+                              <div><span>Components</span></div></a
+                            >
+                          </li>
+                          <li class="nav-item blocks-tab">
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="tab"
+                              href="#blocks"
+                              role="tab"
+                              aria-controls="components"
+                              aria-selected="false"
+                            >
+                              <i class="icon-copy-outline"></i>
+                              <div><span>Blocks</span></div></a
+                            >
+                          </li>
+                        </ul>
+      
+                        <div class="tab-content">
+                          <div
+                            class="tab-pane show active components"
+                            id="components"
+                            data-section="components"
+                            role="tabpanel"
+                            aria-labelledby="components-tab"
+                          >
+                            <div class="search">
+                              <div class="expand">
+                                <button
+                                  class="text-sm"
+                                  title="Expand All"
+                                  data-vvveb-action="expand"
+                                >
+                                  <i class="la la-plus"></i>
+                                </button>
+                                <button
+                                  title="Collapse all"
+                                  data-vvveb-action="collapse"
+                                >
+                                  <i class="la la-minus"></i>
+                                </button>
+                              </div>
+      
+                              <input
+                                class="form-control component-search"
+                                placeholder="Search components"
+                                type="text"
+                                data-vvveb-action="search"
+                                data-vvveb-on="keyup"
+                              />
+                              <button
+                                class="clear-backspace"
+                                data-vvveb-action="clearSearch"
+                              >
+                                <i class="la la-times"></i>
+                              </button>
+                            </div>
+      
+                            <div class="drag-elements-sidepane sidepane">
+                              <div>
+                                <ul
+                                  class="components-list clearfix"
+                                  data-type="leftpanel"
+                                ></ul>
+                              </div>
+                            </div>
+                          </div>
+      
+                          <div
+                            class="tab-pane blocks"
+                            id="blocks"
+                            data-section="content"
+                            role="tabpanel"
+                            aria-labelledby="content-tab"
+                          >
+                            <div class="search">
+                              <div class="expand">
+                                <button
+                                  class="text-sm"
+                                  title="Expand All"
+                                  data-vvveb-action="expand"
+                                >
+                                  <i class="la la-plus"></i>
+                                </button>
+                                <button
+                                  title="Collapse all"
+                                  data-vvveb-action="collapse"
+                                >
+                                  <i class="la la-minus"></i>
+                                </button>
+                              </div>
+      
+                              <input
+                                class="form-control block-search"
+                                placeholder="Search blocks"
+                                type="text"
+                                data-vvveb-action="search"
+                                data-vvveb-on="keyup"
+                              />
+                              <button
+                                class="clear-backspace"
+                                data-vvveb-action="clearSearch"
+                              >
+                                <i class="la la-times"></i>
+                              </button>
+                            </div>
+      
+                            <div class="drag-elements-sidepane sidepane">
+                              <div class="block-preview"><img src="" /></div>
+                              <div>
+                                <ul
+                                  class="blocks-list clearfix"
+                                  data-type="leftpanel"
+                                ></ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+      
+                      <div
+                        class="tab-pane"
+                        id="properties"
+                        role="tabpanel"
+                        aria-labelledby="properties-tab"
+                      >
+                        <div class="component-properties-sidepane">
+                          <div>
+                            <div class="component-properties">
+                              <ul
+                                class="nav nav-tabs nav-fill nav-underline"
+                                id="properties-tabs"
+                                role="tablist"
+                              >
+                                <li class="nav-item content-tab">
+                                  <a
+                                    class="nav-link content-tab active"
+                                    data-bs-toggle="tab"
+                                    href="#content-left-panel-tab"
+                                    role="tab"
+                                    aria-controls="components"
+                                    aria-selected="true"
+                                  >
+                                    <i class="icon-albums-outline"></i>
+                                    <span>Content</span>
+                                  </a>
+                                </li>
+                                <li class="nav-item style-tab">
+                                  <a
+                                    class="nav-link"
+                                    data-bs-toggle="tab"
+                                    href="#style-left-panel-tab"
+                                    role="tab"
+                                    aria-controls="style"
+                                    aria-selected="false"
+                                  >
+                                    <i class="icon-color-fill-outline"></i>
+                                    <span>Style</span></a
+                                  >
+                                </li>
+                                <li class="nav-item advanced-tab">
+                                  <a
+                                    class="nav-link"
+                                    data-bs-toggle="tab"
+                                    href="#advanced-left-panel-tab"
+                                    role="tab"
+                                    aria-controls="advanced"
+                                    aria-selected="false"
+                                  >
+                                    <i class="icon-settings-outline"></i>
+                                    <span>Advanced</span></a
+                                  >
+                                </li>
+                              </ul>
+      
+                              <div class="tab-content" data-offset="20">
+                                <div
+                                  class="tab-pane show active"
+                                  id="content-left-panel-tab"
+                                  data-section="content"
+                                  role="tabpanel"
+                                  aria-labelledby="content-tab"
+                                >
+                                  <div
+                                    class="alert alert-dismissible fade show alert-light m-3"
+                                    role="alert"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="btn-close"
+                                      data-bs-dismiss="alert"
+                                      aria-label="Close"
+                                    ></button>
+                                    <strong>No selected element!</strong><br />
+                                    Click on an element to edit.
+                                  </div>
+                                </div>
+      
+                                <div
+                                  class="tab-pane show"
+                                  id="style-left-panel-tab"
+                                  data-section="style"
+                                  role="tabpanel"
+                                  aria-labelledby="style-tab"
+                                >
+                                  <div class="border-bottom pb-2 px-2">
+                                    <div class="justify-content-end d-flex">
+                                      <select
+                                        class="form-select w-50"
+                                        data-vvveb-action="setState"
+                                        data-vvveb-on="change"
+                                      >
+                                        <option value="">- State -</option>
+                                        <option value="hover">hover</option>
+                                        <option value="active">active</option>
+                                        <option value="nth-of-type(2n)">
+                                          nth-of-type(2n)
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+      
+                                <div
+                                  class="tab-pane show"
+                                  id="advanced-left-panel-tab"
+                                  data-section="advanced"
+                                  role="tabpanel"
+                                  aria-labelledby="advanced-tab"
+                                ></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+      
+                      <div
+                        class="tab-pane"
+                        id="configuration"
+                        role="tabpanel"
+                        aria-labelledby="configuration-tab"
+                      >
+                        <ul
+                          class="nav nav-tabs nav-fill nav-underline sections-tabs"
+                          id="vars-tabs"
+                          role="tablist"
+                        >
+                          <li class="nav-item vars-tab">
+                            <a
+                              class="nav-link active"
+                              data-bs-toggle="tab"
+                              href="#vars-tab"
+                              role="tab"
+                              aria-controls="components"
+                              aria-selected="false"
+                            >
+                              <i class="icon-brush-outline"></i>
+                              <div><span>Variables</span></div></a
+                            >
+                          </li>
+                          <li class="nav-item css-tab">
+                            <a
+                              class="nav-link"
+                              data-bs-toggle="tab"
+                              href="#css-tab"
+                              role="tab"
+                              aria-controls="css"
+                              aria-selected="true"
+                            >
+                              <i class="icon-code-slash-outline"></i>
+                              <div><span>Css</span></div></a
+                            >
+                          </li>
+                        </ul>
+      
+                        <div class="tab-content">
+                          <div
+                            class="tab-pane show active"
+                            id="vars-tab"
+                            data-section="vars"
+                            role="tabpanel"
+                            aria-labelledby="vars-tab"
+                          >
+                            <div class="drag-elements-sidepane sidepane">
+                              <div data-offset="80">
+                                <div class="component-properties">
+                                  <input
+                                    class="header_check"
+                                    type="checkbox"
+                                    checked
+                                    id="header_pallette"
+                                  />
+                                  <div
+                                    class="tab-pane section px-0"
+                                    data-section="content"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+      
+                          <div
+                            class="tab-pane"
+                            id="css-tab"
+                            data-section="css"
+                            role="tabpanel"
+                            aria-labelledby="css-tab"
+                          >
+                            <div class="drag-elements-sidepane sidepane">
+                              <div data-offset="80">
+                                <textarea
+                                  id="css-editor"
+                                  class="form-control"
+                                  rows="24"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end configuration tab -->
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="" id="canvas">
+            <!-- Create content Dynamically-->
+        </div>
+        <div class="" id="right-panel">
+            <!-- Create content Dynamically-->
+        </div>
+        <div class="" id="bottom-panel">
+            <!-- Create content Dynamically-->
+        </div>
+    </div>
+</body>
+<script src="page-builder.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </html>
