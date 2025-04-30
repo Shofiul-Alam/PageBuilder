@@ -2,18 +2,18 @@
 
 
 
-//var name = "Max";
-//let name ='Max';
+var name = "Max";
+let name ='Max';
 
-// if(true){
-//     let name = "Max";
-// }
+if(true){
+    let name = "Max";
+}
 
-// console.log(name);
+console.log(name);
 
-// let age = 30;
-// if(true){
-//     let age = 27;
-//     console.log(age);
-// }
-// console.log(age);
+let age = 30;
+if(true){
+    let age = 27;
+    console.log(age);
+}
+console.log(age);
